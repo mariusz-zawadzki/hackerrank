@@ -27,7 +27,7 @@ fun encryption(s: String): String {
     val rows = Math.round(sqrt).toInt()
 
     val result = Array(cols, { StringBuilder() })
-    maind@ for (i in 0 until cols) {
+    for (i in 0 until cols) {
         for(row in 0 until rows){
             val position = row * cols + i
             if(position < stripped.length){
