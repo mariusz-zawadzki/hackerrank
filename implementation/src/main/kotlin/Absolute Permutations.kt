@@ -10,7 +10,7 @@ fun absolutePermutation(n: Int, k: Int): List<Int> {
     if(n==2 && k ==1){
         return listOf(2,1)
     }
-    if (n % k != 0 && (n/k)%2 !=0) {
+    if (n % k != 0 || (n/k) %2 !=0) {
         return listOf(-1)
     } else {
         val result = mutableListOf<Int>()
