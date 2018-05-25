@@ -17,12 +17,12 @@ fun absolutePermutation(n: Int, k: Int): List<Int> {
         val limit = n / k
         for (i in 1..(limit/2)) {
             for (a in 1..k) {
-                result.add(a + (i) * k)
+                result.add(a*i + (i) * k)
             }
 
             if (result.size < n) {
                 for (a in 1..k) {
-                    result.add(a + (i-1) * k)
+                    result.add(a*(i) + (i-1) * k)
                 }
             }
         }
