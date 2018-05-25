@@ -15,15 +15,13 @@ fun absolutePermutation(n: Int, k: Int): List<Int> {
     } else {
         val result = mutableListOf<Int>()
         val limit = n / k
-        for (i in 1..(limit/2)) {
+        for (iL in 0..((limit-1)/2)) {
+            val i = iL*2
             for (a in 1..k) {
-                result.add(a*i + (i) * k)
+                result.add(a + (i+1)*k)
             }
-
-            if (result.size < n) {
-                for (a in 1..k) {
-                    result.add(a*(i) + (i-1) * k)
-                }
+            for (a in 1..k) {
+                result.add(a + (i)*k)
             }
         }
         return result

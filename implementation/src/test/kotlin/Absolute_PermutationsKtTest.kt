@@ -18,6 +18,13 @@ class Absolute_PermutationsKtTest {
     }
 
     @Test
+    fun `should properly permutate by two`() {
+        val absolutePermutation = absolutePermutation(8, 2)
+
+        Assertions.assertThat(absolutePermutation).isEqualTo(listOf(3,4,1,2,7,8,5,6))
+    }
+
+    @Test
     fun `should satisfy example from sample 0`() {
         val absolutePermutation = absolutePermutation(2, 1)
 
@@ -51,6 +58,13 @@ class Absolute_PermutationsKtTest {
 
         val inputFile = "/Absolute_Permutation_input2.txt"
         val outputFile = "/Absolute_Permutation_output2.txt"
+        test(inputFile, outputFile)
+    }
+    @Test
+    fun `should satisfy test 10`() {
+
+        val inputFile = "/Absolute_Permutation_input10.txt"
+        val outputFile = "/Absolute_Permutation_output10.txt"
         test(inputFile, outputFile)
     }
 
