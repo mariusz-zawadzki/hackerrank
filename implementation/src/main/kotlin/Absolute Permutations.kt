@@ -13,12 +13,9 @@ fun absolutePermutation(n: Int, k: Int): List<Int> {
     } else {
         val result = mutableListOf<Int>()
         val limit = n / k - 1
-        val dividerRange = 0..(limit) step 2
-        val halfsRange = 1 downTo 0
-        val stepsRange = 1..k
-        for (divider in dividerRange) {
-            for (half in halfsRange) {
-                for (step in stepsRange) {
+        for (divider in 0..(limit) step 2) {
+            for (half in 1 downTo 0) {
+                for (step in 1..k) {
                     result.add(step + (divider + half) * k)
                 }
             }
