@@ -14,9 +14,8 @@ fun absolutePermutation(n: Int, k: Int): List<Int> {
         return listOf(-1)
     } else {
         val result = mutableListOf<Int>()
-        val limit = n / k
-        for (iL in 0..((limit-1)/2)) {
-            val i = iL*2
+        val limit = n / k -1
+        for (i in 0..(limit) step 2) {
             for (a in 1..k) {
                 result.add(a + (i+1)*k)
             }
