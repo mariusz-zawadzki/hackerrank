@@ -20,17 +20,21 @@ import kotlin.text.*
 // Complete the surfaceArea function below.
 fun surfaceArea(A: Array<Array<Int>>, H :Int, W:Int): Int {
 
+    //surface area from top and bottom is always equal to standard rectangle area
     var surface = 2* H*W
+    //calculate faces (differences in heights for each)
     A.forEach { row->
         var prev = 0
         var sum = 0
         row.forEach {
+            //abs is to not make a difference if it is higher or lower
             sum += Math.abs(prev-it)
             prev = it
         }
         sum += prev
         surface +=sum
     }
+    //do the same in perpendicular direction
     for(colIndex in 0 until W)
     {
         var sum = 0
