@@ -17,7 +17,7 @@ fun prims(edges: Array<Array<Int>>, start: Int): Int {
     allowedMap.put(start, edgeMap[start])
     while (nodesLeft.isNotEmpty())
     {
-        val shortestEdge = allowedMap.flatMap { it.value }.filter { !usedNodes.contains(it.first) }.minBy { it.second }
+        val shortestEdge = allowedMap.flatMap { it.value }.minBy { it.second }
         if(shortestEdge==null)
         {
             return sum
@@ -26,7 +26,11 @@ fun prims(edges: Array<Array<Int>>, start: Int): Int {
         {
             sum+=shortestEdge.second
             usedNodes.add(shortestEdge.first)
-            allowedMap.put(shortestEdge.first, edgeMap[shortestEdge.first])
+            nodesLeft.removeIf { it == shortestEdge.first }
+            allowedMap.forEach {
+                it.value.removeIf {it.first == shortestEdge.first}
+            }
+            allowedMap[shortestEdge.first] = edgeMap[shortestEdge.first].filter { !usedNodes.contains(it.first) }.toMutableList()
         }
 
     }
