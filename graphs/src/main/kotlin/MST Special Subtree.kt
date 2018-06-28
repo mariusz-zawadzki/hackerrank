@@ -14,40 +14,31 @@ fun prims(edges: Array<Array<Int>>, start: Int): Int {
     val nodesLeft = HashSet(edgeMap.keys)
     nodesLeft.remove(start)
     val allowedMap = Multimap()
-    allowedMap.put(start, edgeMap[start])
-    while (nodesLeft.isNotEmpty())
-    {
-        val shortestEdge = allowedMap.flatMap { it.value }.minBy { it.second }
-        if(shortestEdge==null)
-        {
-            return sum
+    allowedMap[start] = edgeMap[start]
+    while (nodesLeft.isNotEmpty()) {
+        val shortestEdge = allowedMap.flatMap { it.value }.minBy { it.second } ?: return sum
+        sum += shortestEdge.second
+        usedNodes.add(shortestEdge.first)
+        nodesLeft.removeIf { it == shortestEdge.first }
+        allowedMap.forEach {
+            it.value.removeIf { it.first == shortestEdge.first }
         }
-        else
-        {
-            sum+=shortestEdge.second
-            usedNodes.add(shortestEdge.first)
-            nodesLeft.removeIf { it == shortestEdge.first }
-            allowedMap.forEach {
-                it.value.removeIf {it.first == shortestEdge.first}
-            }
-            allowedMap[shortestEdge.first] = edgeMap[shortestEdge.first].filter { !usedNodes.contains(it.first) }.toMutableList()
-        }
-
+        allowedMap[shortestEdge.first] = edgeMap[shortestEdge.first].filter { !usedNodes.contains(it.first) }.toMutableList()
     }
     return sum
 }
 
-class Multimap: HashMap<Int, MutableList<Pair<Int, Int>>>() {
+class Multimap : HashMap<Int, MutableList<Pair<Int, Int>>>() {
 
-    override operator fun get(key:Int ): MutableList<Pair<Int,Int>>{
+    override operator fun get(key: Int): MutableList<Pair<Int, Int>> {
         val get = super.get(key)
-        if (get == null){
+        if (get == null) {
             this[key] = mutableListOf()
         }
         return super.get(key)!!
     }
 
-    fun putSingle(key:Int, value: Pair<Int,Int>){
+    fun putSingle(key: Int, value: Pair<Int, Int>) {
         this[key].add(value)
     }
 }
